@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart StudyOS</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs">
+      <button class="nav-tab active" data-tab="timer">Timer</button>
+      <button class="nav-tab" data-tab="dashboard">Dashboard</button>
+      <button class="nav-tab" data-tab="quick">Quick</button>
+    </nav>
+
+    <!-- Timer Tab -->
+    <div id="timer-tab" class="tab-content active">
+      <div class="timer-header">
+        <div class="logo">
+          <div class="logo-icon">S</div>
+          <span class="logo-text">Smart StudyOS</span>
+        </div>
+        <div class="streak-badge" id="streak-display">
+          <span class="fire-icon">🔥</span>
+          <span id="streak-count">0</span>
+        </div>
+      </div>
+
+      <div class="timer-ring-container">
+        <svg class="timer-ring" viewBox="0 0 200 200">
+          <circle class="timer-bg" cx="100" cy="100" r="90" />
+          <circle class="timer-progress" cx="100" cy="100" r="90" id="timer-progress" />
+        </svg>
+        <div class="timer-display">
+          <span class="timer-time" id="timer-display">25:00</span>
+          <span class="timer-label" id="timer-label">Focus Time</span>
+        </div>
+      </div>
+
+      <div class="timer-mode-selector">
+        <button class="mode-btn active" data-mode="25">25/5</button>
+        <button class="mode-btn" data-mode="50">50/10</button>
+        <button class="mode-btn" data-mode="custom">Custom</button>
+      </div>
+
+      <div class="timer-controls">
+        <button class="control-btn reset-btn" id="reset-btn" title="Reset">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+            <path d="M3 3v5h5"/>
+          </svg>
+        </button>
+        <button class="control-btn play-btn" id="play-btn" title="Start">
+          <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="5,3 19,12 5,21"/>
+          </svg>
+          <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor" style="display:none">
+            <rect x="6" y="4" width="4" height="16"/>
+            <rect x="14" y="4" width="4" height="16"/>
+          </svg>
+        </button>
+        <button class="control-btn skip-btn" id="skip-btn" title="Skip">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="5,4 15,12 5,20"/>
+            <rect x="15" y="4" width="4" height="16"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="session-counter">
+        <span id="sessions-today">0</span> sessions today
+      </div>
+
+      <div class="sound-toggle">
+        <button id="sound-btn" class="sound-btn active">
+          <svg class="sound-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+          </svg>
+          <svg class="sound-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none">
+            <polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/>
+            <line x1="23" y1="9" x2="17" y2="15"/>
+            <line x1="17" y1="9" x2="23" y2="15"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Dashboard Tab -->
+    <div id="dashboard-tab" class="tab-content">
+      <div class="dashboard-header">
+        <h2>Dashboard</h2>
+        <span class="date-display" id="current-date"></span>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon hours-icon">⏱</div>
+          <div class="stat-value" id="hours-studied">0.0h</div>
+          <div class="stat-label">Today</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon tasks-icon">✓</div>
+          <div class="stat-value" id="tasks-completed">0</div>
+          <div class="stat-label">Tasks Done</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon streak-icon">🔥</div>
+          <div class="stat-value" id="current-streak">0</div>
+          <div class="stat-label">Day Streak</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon xp-icon">⚡</div>
+          <div class="stat-value" id="total-xp">0</div>
+          <div class="stat-label">XP Earned</div>
+        </div>
+      </div>
+
+      <div class="progress-section">
+        <div class="progress-header">
+          <span>Daily Goal</span>
+          <span id="daily-goal-progress">0%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="daily-progress-bar" style="width: 0%"></div>
+        </div>
+        <div class="progress-info" id="daily-goal-info">0h / 4h target</div>
+      </div>
+
+      <div class="upcoming-tasks">
+        <h3>Upcoming Tasks</h3>
+        <div id="tasks-list" class="tasks-list">
+          <div class="empty-state">No tasks yet</div>
+        </div>
+      </div>
+
+      <button class="open-app-btn" id="open-app-btn">
+        Open Full App
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+          <polyline points="15,3 21,3 21,9"/>
+          <line x1="10" y1="14" x2="21" y2="3"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Quick Actions Tab -->
+    <div id="quick-tab" class="tab-content">
+      <div class="quick-header">
+        <h2>Quick Actions</h2>
+      </div>
+
+      <div class="quick-section">
+        <h3>Add Quick Task</h3>
+        <div class="quick-add">
+          <input type="text" id="quick-task-input" placeholder="What do you need to do?" />
+          <select id="quick-task-priority">
+            <option value="low">Low</option>
+            <option value="medium" selected>Medium</option>
+            <option value="high">High</option>
+          </select>
+          <button id="add-task-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"/>
+              <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="quick-section">
+        <h3>Ask AI Coach</h3>
+        <div class="ai-coach">
+          <input type="text" id="ai-question-input" placeholder="Ask for study advice..." />
+          <button id="ask-ai-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="22" y1="2" x2="11" y2="13"/>
+              <polygon points="22,2 15,22 11,13 2,9"/>
+            </svg>
+          </button>
+        </div>
+        <div id="ai-response" class="ai-response" style="display: none;"></div>
+      </div>
+
+      <div class="quick-section shortcuts-section">
+        <h3>Quick Links</h3>
+        <div class="shortcuts-grid">
+          <button class="shortcut-btn" data-action="analytics">
+            <span class="shortcut-icon">📊</span>
+            <span>Analytics</span>
+          </button>
+          <button class="shortcut-btn" data-action="planner">
+            <span class="shortcut-icon">📅</span>
+            <span>Planner</span>
+          </button>
+          <button class="shortcut-btn" data-action="notes">
+            <span class="shortcut-icon">📝</span>
+            <span>Notes</span>
+          </button>
+          <button class="shortcut-btn" data-action="settings">
+            <span class="shortcut-icon">⚙️</span>
+            <span>Settings</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="popup-footer">
+      <button class="footer-btn" id="options-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+        </svg>
+        Settings
+      </button>
+      <button class="footer-btn" id="help-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+          <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+        Help
+      </button>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

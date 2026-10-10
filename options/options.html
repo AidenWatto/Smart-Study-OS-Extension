@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart StudyOS - Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <div class="logo-icon">S</div>
+          <span class="logo-text">Smart StudyOS</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item active" data-section="dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7"/>
+            <rect x="14" y="3" width="7" height="7"/>
+            <rect x="14" y="14" width="7" height="7"/>
+            <rect x="3" y="14" width="7" height="7"/>
+          </svg>
+          Dashboard
+        </a>
+        <a href="#" class="nav-item" data-section="settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+          </svg>
+          Settings
+        </a>
+        <a href="#" class="nav-item" data-section="data">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <ellipse cx="12" cy="5" rx="9" ry="3"/>
+            <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+          </svg>
+          Data
+        </a>
+        <a href="#" class="nav-item" data-section="help">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          Help & Support
+        </a>
+        <a href="#" class="nav-item" data-section="about">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="16" x2="12" y2="12"/>
+            <line x1="12" y1="8" x2="12.01" y2="8"/>
+          </svg>
+          About
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="version">Version 1.0.0</div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Dashboard Section -->
+      <section id="dashboard-section" class="section active">
+        <header class="section-header">
+          <h1>Dashboard</h1>
+          <p class="section-subtitle">Your study progress at a glance</p>
+        </header>
+
+        <div class="stats-overview">
+          <div class="stat-card large">
+            <div class="stat-icon">🔥</div>
+            <div class="stat-content">
+              <div class="stat-value" id="dash-streak">0</div>
+              <div class="stat-label">Day Streak</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">⏱</div>
+            <div class="stat-content">
+              <div class="stat-value" id="dash-hours">0h</div>
+              <div class="stat-label">This Week</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">✓</div>
+            <div class="stat-content">
+              <div class="stat-value" id="dash-tasks">0</div>
+              <div class="stat-label">Tasks Done</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">⚡</div>
+            <div class="stat-content">
+              <div class="stat-value" id="dash-xp">0</div>
+              <div class="stat-label">Total XP</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="recent-activity">
+          <h2>Recent Activity</h2>
+          <div class="activity-list" id="activity-list">
+            <div class="empty-state">No recent activity</div>
+          </div>
+        </div>
+
+        <div class="upcoming-section">
+          <h2>Upcoming Tasks</h2>
+          <div class="tasks-grid" id="upcoming-tasks">
+            <div class="empty-state">No upcoming tasks</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Settings Section -->
+      <section id="settings-section" class="section">
+        <header class="section-header">
+          <h1>Settings</h1>
+          <p class="section-subtitle">Customize your study experience</p>
+        </header>
+
+        <div class="settings-group">
+          <h2>Profile</h2>
+          <div class="form-group">
+            <label for="user-name">Your Name</label>
+            <input type="text" id="user-name" placeholder="Enter your name" />
+          </div>
+          <div class="form-group">
+            <label for="academic-level">Academic Level</label>
+            <select id="academic-level">
+              <option value="">Select level</option>
+              <option value="High School">High School</option>
+              <option value="Undergraduate">Undergraduate</option>
+              <option value="Graduate">Graduate</option>
+              <option value="PhD">PhD</option>
+              <option value="Professional">Professional</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="daily-target">Daily Study Target: <span id="target-value">4</span> hours</label>
+            <input type="range" id="daily-target" min="1" max="12" step="0.5" value="4" />
+          </div>
+          <button class="btn btn-primary" id="save-profile">Save Profile</button>
+        </div>
+
+        <div class="settings-group">
+          <h2>Timer Preferences</h2>
+          <div class="form-group">
+            <label for="default-timer">Default Timer Mode</label>
+            <select id="default-timer">
+              <option value="25">Pomodoro (25/5)</option>
+              <option value="50">Extended (50/10)</option>
+              <option value="custom">Custom</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group half">
+              <label for="custom-work">Custom Work (min)</label>
+              <input type="number" id="custom-work" min="5" max="120" value="45" />
+            </div>
+            <div class="form-group half">
+              <label for="custom-break">Custom Break (min)</label>
+              <input type="number" id="custom-break" min="1" max="30" value="10" />
+            </div>
+          </div>
+          <div class="form-group checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="sound-enabled" checked />
+              <span class="checkmark"></span>
+              Enable sound notifications
+            </label>
+          </div>
+          <div class="form-group checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="browser-notifications" checked />
+              <span class="checkmark"></span>
+              Enable browser notifications
+            </label>
+          </div>
+        </div>
+
+        <div class="settings-group">
+          <h2>AI Integration</h2>
+          <p class="settings-description">
+            Add your free Gemini API key to enable AI-powered study coaching.
+            <a href="https://aistudio.google.com/apikey" target="_blank" class="link">Get your free key</a>
+          </p>
+          <div class="form-group">
+            <label for="gemini-key">Gemini API Key</label>
+            <div class="input-with-btn">
+              <input type="password" id="gemini-key" placeholder="Enter your API key" />
+              <button class="btn btn-secondary" id="save-gemini-key">Save</button>
+            </div>
+          </div>
+          <div class="api-status" id="api-status">
+            <span class="status-icon">⚪</span>
+            <span>API key not configured</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Data Section -->
+      <section id="data-section" class="section">
+        <header class="section-header">
+          <h1>Data Management</h1>
+          <p class="section-subtitle">Export, import, or reset your data</p>
+        </header>
+
+        <div class="settings-group">
+          <h2>Backup & Restore</h2>
+          <p class="settings-description">
+            All your data is stored locally in your browser. Export regularly to keep backups.
+          </p>
+          <div class="btn-group">
+            <button class="btn btn-secondary" id="export-data">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7,10 12,15 17,10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              Export Data
+            </button>
+            <button class="btn btn-secondary" id="import-data">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="17,8 12,3 7,8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+              Import Data
+            </button>
+            <input type="file" id="import-file" accept=".json" style="display: none" />
+          </div>
+        </div>
+
+        <div class="settings-group danger-zone">
+          <h2>Danger Zone</h2>
+          <p class="settings-description">
+            These actions are irreversible. Please be careful.
+          </p>
+          <button class="btn btn-danger" id="reset-data">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="3,6 5,6 21,6"/>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+            </svg>
+            Reset All Data
+          </button>
+        </div>
+
+        <div class="data-overview">
+          <h2>Storage Overview</h2>
+          <div class="storage-bars">
+            <div class="storage-item">
+              <div class="storage-label">Focus Sessions</div>
+              <div class="storage-bar"><div class="storage-fill" id="sessions-bar"></div></div>
+              <div class="storage-value" id="sessions-count">0</div>
+            </div>
+            <div class="storage-item">
+              <div class="storage-label">Tasks</div>
+              <div class="storage-bar"><div class="storage-fill" id="tasks-bar"></div></div>
+              <div class="storage-value" id="tasks-count">0</div>
+            </div>
+            <div class="storage-item">
+              <div class="storage-label">Study Days</div>
+              <div class="storage-bar"><div class="storage-fill" id="days-bar"></div></div>
+              <div class="storage-value" id="days-count">0</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Help Section -->
+      <section id="help-section" class="section">
+        <header class="section-header">
+          <h1>Help & Support</h1>
+          <p class="section-subtitle">Get answers and assistance</p>
+        </header>
+
+        <div class="help-categories">
+          <div class="help-category">
+            <h2>Getting Started</h2>
+            <div class="faq-list">
+              <div class="faq-item">
+                <button class="faq-question">
+                  How do I start a focus session?
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6,9 12,15 18,9"/>
+                  </svg>
+                </button>
+                <div class="faq-answer">
+                  Click the Play button on the Timer tab to start a focus session. You can choose between 25/5 (Pomodoro), 50/10 (Extended), or set a custom duration. The timer will run in the background even when the popup is closed.
+                </div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-question">
+                  How do I add tasks?
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6,9 12,15 18,9"/>
+                  </svg>
+                </button>
+                <div class="faq-answer">
+                  Go to the Quick tab and use the "Add Quick Task" section. Enter a task title, select a priority level, and click the plus button. Tasks are automatically saved and will appear in your Dashboard.
+                </div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-question">
+                  What is the streak and how is it calculated?
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6,9 12,15 18,9"/>
+                  </svg>
+                </button>
+                <div class="faq-answer">
+                  Your streak represents consecutive days of studying. Complete at least one focus session per day to build your streak. Miss a day and your streak resets. Study consistently to earn badges and XP!
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="help-category">
+            <h2>AI Features</h2>
+            <div class="faq-list">
+              <div class="faq-item">
+                <button class="faq-question">
+                  How do I enable AI coaching?
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6,9 12,15 18,9"/>
+                  </svg>
+                </button>
+                <div class="faq-answer">
+                  Go to Settings, scroll to "AI Integration" section, and enter your Gemini API key. You can get a free key from Google AI Studio. Once configured, you can ask study questions in the Quick tab.
+                </div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-question">
+                  Is the AI key stored securely?
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6,9 12,15 18,9"/>
+                  </svg>
+                </button>
+                <div class="faq-answer">
+                  Your API key is stored locally in your browser using Chrome's secure storage. It is never sent to our servers. All AI requests go directly to Google's Gemini API from your browser.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="help-category">
+            <h2>Troubleshooting</h2>
+            <div class="faq-list">
+              <div class="faq-item">
+                <button class="faq-question">
+                  My timer notifications aren't working
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6,9 12,15 18,9"/>
+                  </svg>
+                </button>
+                <div class="faq-answer">
+                  Make sure browser notifications are enabled in Settings. Also check your browser's notification permissions for extensions. On Chrome, go to Settings > Privacy > Site Settings > Notifications.
+                </div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-question">
+                  I lost my data / How do I backup?
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6,9 12,15 18,9"/>
+                  </svg>
+                </button>
+                <div class="faq-answer">
+                  All data is stored locally in your browser. Go to Settings > Data Management > Export Data to create a backup JSON file. Use Import Data to restore from a backup. We recommend exporting regularly.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="support-section">
+          <h2>Need More Help?</h2>
+          <div class="support-cards">
+            <a href="mailto:support@smartstudyos.app" class="support-card">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+              <span>Email Support</span>
+            </a>
+            <a href="#" class="support-card" id="feedback-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+              </svg>
+              <span>Send Feedback</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section id="about-section" class="section">
+        <header class="section-header">
+          <h1>About Smart StudyOS</h1>
+          <p class="section-subtitle">Learn more about the project</p>
+        </header>
+
+        <div class="about-hero">
+          <div class="about-logo">
+            <div class="logo-large">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/>
+                <path d="M12 6v6l4 2"/>
+                <path d="M9 12h.01"/>
+                <path d="M15 12h.01"/>
+              </svg>
+            </div>
+            <h2>Smart StudyOS</h2>
+            <p class="tagline">AI-Powered Study Productivity Suite</p>
+          </div>
+        </div>
+
+        <div class="about-section">
+          <h3>Our Mission</h3>
+          <p>
+            Smart StudyOS is designed to help students achieve their academic goals through
+            intelligent study planning, focus management, and progress tracking. We believe
+            that with the right tools and consistent effort, anyone can improve their
+            learning outcomes.
+          </p>
+        </div>
+
+        <div class="about-section">
+          <h3>Features</h3>
+          <ul class="feature-list">
+            <li>
+              <strong>Pomodoro Timer</strong> - Focus sessions with customizable durations
+            </li>
+            <li>
+              <strong>AI Study Coach</strong> - Get personalized study advice powered by Gemini AI
+            </li>
+            <li>
+              <strong>Streak Tracking</strong> - Build consistency and earn badges
+            </li>
+            <li>
+              <strong>Task Management</strong> - Organize and prioritize your study tasks
+            </li>
+            <li>
+              <strong>Progress Analytics</strong> - Track your productivity over time
+            </li>
+            <li>
+              <strong>Privacy First</strong> - All data stored locally in your browser
+            </li>
+          </ul>
+        </div>
+
+        <div class="about-section developer-section">
+          <h3>About the Developer</h3>
+          <div class="developer-card">
+            <div class="developer-avatar">
+              <div class="avatar-placeholder">SS</div>
+            </div>
+            <div class="developer-info">
+              <h4>Smart StudyOS Team</h4>
+              <p class="developer-title">Student Developers</p>
+              <p class="developer-bio">
+                Built with passion by students, for students. We understand the challenges
+                of academic life and created Smart StudyOS to make studying more effective
+                and enjoyable.
+              </p>
+              <div class="developer-achievements">
+                <div class="achievement">
+                  <span class="achievement-icon">🎓</span>
+                  <span>Designed for Students</span>
+                </div>
+                <div class="achievement">
+                  <span class="achievement-icon">💡</span>
+                  <span>AI-Powered</span>
+                </div>
+                <div class="achievement">
+                  <span class="achievement-icon">🔒</span>
+                  <span>Privacy Focused</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-section">
+          <h3>Version Information</h3>
+          <div class="version-info">
+            <div class="version-row">
+              <span>Extension Version</span>
+              <span class="version-number">1.0.0</span>
+            </div>
+            <div class="version-row">
+              <span>Release Date</span>
+              <span>June 2024</span>
+            </div>
+            <div class="version-row">
+              <span>Manifest Version</span>
+              <span>3</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-section links-section">
+          <h3>Links</h3>
+          <div class="links-grid">
+            <a href="https://smartstudyos.app" target="_blank" class="link-card">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="2" y1="12" x2="22" y2="12"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+              <span>Website</span>
+            </a>
+            <a href="#" class="link-card" id="changelog-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14,2 14,8 20,8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10,9 9,9 8,9"/>
+              </svg>
+              <span>Changelog</span>
+            </a>
+            <a href="#" class="link-card" id="privacy-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+              <span>Privacy Policy</span>
+            </a>
+            <a href="#" class="link-card" id="terms-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14,2 14,8 20,8"/>
+                <line x1="12" y1="18" x2="12" y2="12"/>
+                <line x1="9" y1="15" x2="15" y2="15"/>
+              </svg>
+              <span>Terms of Use</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="about-footer">
+          <p>Made with dedication for students everywhere</p>
+          <p class="copyright">&copy; 2024 Smart StudyOS. All rights reserved.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Confirmation modal -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal" id="confirm-modal">
+      <h3 id="modal-title">Confirm Action</h3>
+      <p id="modal-message">Are you sure?</p>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" id="modal-cancel">Cancel</button>
+        <button class="btn btn-danger" id="modal-confirm">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>
